@@ -32,19 +32,20 @@ def plot_all_strategy_returns(strategy_range, strategy_returns):
     plt.show()
 
 
-def plot_simulation_test(all_returns, test_return, bins=50):
-    plt.hist(all_returns, bins=50)
-    plt.axvline(x=test_return, color='r', linestyle='--')
-    plt.title('Simulated Returns vs. Strategy Return')
-    plt.xlabel('Yearly Avg Returns')
-    plt.ylabel('Frequency')
-    plt.show()
-
-
 def print_p_upper(all_returns, test_return):
     numer_of_simulations_run = len(all_returns)
     number_of_times_strategy_outperform_simuation = (
         all_returns >= test_return).sum()
     p_upper = (number_of_times_strategy_outperform_simuation + 1) / \
         (numer_of_simulations_run + 1)
-    return print('-'*10, '\n', 'p value:', p_upper)
+    return print('p value:', p_upper, '\n', '-'*10)
+
+
+def plot_simulation_test(all_returns, test_return, bins=50):
+    print_p_upper(all_returns, test_return)
+    plt.hist(all_returns, bins=50)
+    plt.axvline(x=test_return, color='r', linestyle='--')
+    plt.title('Simulated Returns vs. Strategy Return')
+    plt.xlabel('Yearly Avg Returns')
+    plt.ylabel('Frequency')
+    plt.show()
